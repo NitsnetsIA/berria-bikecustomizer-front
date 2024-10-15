@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelBtn = document.getElementById('cancel-btn');
 
     const bikeColors = {
-        background: 'C01-BLACK',
+        background: 'C95-GREEN',
         finish: 'Mate',
         color1: 'C01-BLACK',
         color2: 'C01-BLACK',
@@ -14,8 +14,21 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function updateBikeImage() {
-        // In a real application, you would update the bike image layers here
-        // For this example, we'll just log the current configuration
+        const parts = {
+            background: '0-1',
+            color1: '0-2',
+            color2: '0-3',
+            graphic1: '0-4',
+            graphic2: '0-5'
+        };
+
+        Object.keys(parts).forEach(part => {
+            const imgElement = document.getElementById(`${part}-layer`);
+            if (imgElement) {
+                const colorCode = bikeColors[part].split('-')[0];
+                imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
+            }
+        });
         console.log('Current bike configuration:', bikeColors);
     }
 
@@ -26,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     colorOptions.forEach(option => {
         option.addEventListener('click', function() {
-            const colorType = this.parentElement.id.replace('-options', '');
+            const colorType = this.parentElement.id.replace('-options', '').replace('-colors', '');
             bikeColors[colorType] = this.dataset.color;
             setActiveOption(this.parentElement.querySelectorAll('.color-option'), this);
             updateBikeImage();
@@ -50,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reset all options to default
         colorOptions.forEach(option => option.classList.remove('active'));
         finishOptions.forEach(option => option.classList.remove('active'));
-        document.querySelector('#background-colors .color-option:nth-child(5)').classList.add('active');
+        document.querySelector('#background-colors .color-option[data-color="C95-GREEN"]').classList.add('active');
         document.querySelector('#finish-options .finish-option:first-child').classList.add('active');
         document.querySelector('#color1-options .color-option:first-child').classList.add('active');
         document.querySelector('#color2-options .color-option:first-child').classList.add('active');
@@ -58,8 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
 
         // Reset bikeColors object
-        Object.keys(bikeColors).forEach(key => bikeColors[key] = 'C01-BLACK');
+        bikeColors.background = 'C95-GREEN';
         bikeColors.finish = 'Mate';
+        bikeColors.color1 = 'C01-BLACK';
+        bikeColors.color2 = 'C01-BLACK';
+        bikeColors.graphic1 = 'C01-BLACK';
+        bikeColors.graphic2 = 'C01-BLACK';
 
         updateBikeImage();
     });
