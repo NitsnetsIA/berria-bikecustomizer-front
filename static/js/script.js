@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
         Object.keys(parts).forEach(part => {
             const imgElement = document.getElementById(`${part}-layer`);
             if (imgElement) {
-                if (part === 'layer0' || part === 'layer6') {
+                if (part === 'layer0') {
+                    imgElement.src = `/static/images/MAKO-${parts[part]}-XX-XX-${bikeColors[part]}.png`;
+                } else if (part === 'layer6') {
                     imgElement.src = `/static/images/MAKO-${parts[part]}-XX-XX-${bikeColors[part]}.png`;
                 } else {
                     const colorCode = bikeColors[part].split('-')[0];
