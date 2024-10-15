@@ -5,27 +5,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetBtn = document.getElementById('reset-btn');
 
     const bikeColors = {
+        layer0: 'XX-GRUPO1',
         background: 'C95-GREEN',
         color1: 'C105-BLACK',
         color2: 'C01-BLACK',
         graphic1: 'C01-BLACK',
-        graphic2: 'C01-BLACK'
+        graphic2: 'C01-BLACK',
+        layer6: 'XX-RUEDAS1'
     };
 
     function updateBikeImage() {
         const parts = {
+            layer0: '0-0',
             background: '0-1',
             color1: '0-2',
             color2: '0-3',
             graphic1: '0-4',
-            graphic2: '0-5'
+            graphic2: '0-5',
+            layer6: '0-6'
         };
 
         Object.keys(parts).forEach(part => {
             const imgElement = document.getElementById(`${part}-layer`);
             if (imgElement) {
-                const colorCode = bikeColors[part].split('-')[0];
-                imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
+                if (part === 'layer0' || part === 'layer6') {
+                    imgElement.src = `/static/images/MAKO-${parts[part]}-XX-XX-${bikeColors[part]}.png`;
+                } else {
+                    const colorCode = bikeColors[part].split('-')[0];
+                    imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
+                }
             }
         });
         console.log('Current bike configuration:', bikeColors);
@@ -64,11 +72,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
 
         // Reset bikeColors object
+        bikeColors.layer0 = 'XX-GRUPO1';
         bikeColors.background = 'C95-GREEN';
         bikeColors.color1 = 'C105-BLACK';
         bikeColors.color2 = 'C01-BLACK';
         bikeColors.graphic1 = 'C01-BLACK';
         bikeColors.graphic2 = 'C01-BLACK';
+        bikeColors.layer6 = 'XX-RUEDAS1';
 
         updateBikeImage();
     }
