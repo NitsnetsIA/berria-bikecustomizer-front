@@ -5,20 +5,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetBtn = document.getElementById('reset-btn');
 
     const bikeColors = {
+        layer0: 'C01-BLACK',
         background: 'C95-GREEN',
         color1: 'C105-BLACK',
         color2: 'C01-BLACK',
         graphic1: 'C01-BLACK',
-        graphic2: 'C01-BLACK'
+        graphic2: 'C01-BLACK',
+        layer6: 'C01-BLACK'
     };
 
     function updateBikeImage() {
         const parts = {
+            layer0: '0-0',
             background: '0-1',
             color1: '0-2',
             color2: '0-3',
             graphic1: '0-4',
-            graphic2: '0-5'
+            graphic2: '0-5',
+            layer6: '0-6'
         };
 
         Object.keys(parts).forEach(part => {
@@ -57,18 +61,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function resetCustomization() {
         // Reset all options to default
         colorOptions.forEach(option => option.classList.remove('active'));
+        document.querySelector('#layer0-options .color-option:first-child').classList.add('active');
         document.querySelector('#background-colors .color-option[data-color="C95-GREEN"]').classList.add('active');
         document.querySelector('#color1-options .color-option:first-child').classList.add('active');
         document.querySelector('#color2-options .color-option:first-child').classList.add('active');
         document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
         document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
+        document.querySelector('#layer6-options .color-option:first-child').classList.add('active');
 
         // Reset bikeColors object
+        bikeColors.layer0 = 'C01-BLACK';
         bikeColors.background = 'C95-GREEN';
         bikeColors.color1 = 'C105-BLACK';
         bikeColors.color2 = 'C01-BLACK';
         bikeColors.graphic1 = 'C01-BLACK';
         bikeColors.graphic2 = 'C01-BLACK';
+        bikeColors.layer6 = 'C01-BLACK';
 
         updateBikeImage();
     }

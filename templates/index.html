@@ -15,15 +15,25 @@
         <div class="row">
             <div class="col-md-8">
                 <div id="bike-container" class="position-relative">
+                    <img id="layer0-layer" src="{{ url_for('static', filename='images/MAKO-0-0-C01-XX-XX-XX.png') }}" alt="Layer 0" class="img-fluid position-absolute top-0 start-0">
                     <img id="background-layer" src="{{ url_for('static', filename='images/MAKO-0-1-C95-XX-XX-XX.png') }}" alt="Bike Background" class="img-fluid">
                     <img id="color1-layer" src="{{ url_for('static', filename='images/MAKO-0-2-C105-XX-XX-XX.png') }}" alt="Color 1" class="img-fluid position-absolute top-0 start-0">
                     <img id="color2-layer" src="{{ url_for('static', filename='images/MAKO-0-3-C01-XX-XX-XX.png') }}" alt="Color 2" class="img-fluid position-absolute top-0 start-0">
                     <img id="graphic1-layer" src="{{ url_for('static', filename='images/MAKO-0-4-C01-XX-XX-XX.png') }}" alt="Graphic 1" class="img-fluid position-absolute top-0 start-0">
                     <img id="graphic2-layer" src="{{ url_for('static', filename='images/MAKO-0-5-C01-XX-XX-XX.png') }}" alt="Graphic 2" class="img-fluid position-absolute top-0 start-0">
+                    <img id="layer6-layer" src="{{ url_for('static', filename='images/MAKO-0-6-C01-XX-XX-XX.png') }}" alt="Layer 6" class="img-fluid position-absolute top-0 start-0">
                 </div>
             </div>
             <div class="col-md-4">
                 <h2>Colors and Finishes</h2>
+                <div class="mb-3">
+                    <h3>Layer 0</h3>
+                    <div id="layer0-options" class="d-flex flex-wrap">
+                        <div class="color-option active" data-color="C01-BLACK" style="background-color: #000000;"></div>
+                        <div class="color-option" data-color="C02-WHITE" style="background-color: #FFFFFF;"></div>
+                        <div class="color-option" data-color="C03-RED" style="background-color: #FF0000;"></div>
+                    </div>
+                </div>
                 <div class="mb-3">
                     <h3>Background</h3>
                     <div id="background-colors" class="d-flex flex-wrap">
@@ -69,6 +79,14 @@
                         <div class="color-option active" data-color="C01-BLACK" style="background-color: #000000;"></div>
                         <div class="color-option" data-color="C02-WHITE" style="background-color: #FFFFFF;"></div>
                         <div class="color-option" data-color="C22-RED" style="background-color: #FF0000;"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h3>Layer 6</h3>
+                    <div id="layer6-options" class="d-flex flex-wrap">
+                        <div class="color-option active" data-color="C01-BLACK" style="background-color: #000000;"></div>
+                        <div class="color-option" data-color="C02-WHITE" style="background-color: #FFFFFF;"></div>
+                        <div class="color-option" data-color="C03-RED" style="background-color: #FF0000;"></div>
                     </div>
                 </div>
                 <div class="mt-4">
