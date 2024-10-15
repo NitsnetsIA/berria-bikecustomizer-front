@@ -1,13 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const colorOptions = document.querySelectorAll('.color-option');
-    const finishOptions = document.querySelectorAll('.finish-option');
     const acceptBtn = document.getElementById('accept-btn');
     const cancelBtn = document.getElementById('cancel-btn');
+    const resetBtn = document.getElementById('reset-btn');
 
     const bikeColors = {
         background: 'C95-GREEN',
-        finish: 'Mate',
-        color1: 'C01-BLACK',
+        color1: 'C105-BLACK',
         color2: 'C01-BLACK',
         graphic1: 'C01-BLACK',
         graphic2: 'C01-BLACK'
@@ -46,25 +45,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    finishOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            bikeColors.finish = this.dataset.finish;
-            setActiveOption(finishOptions, this);
-            updateBikeImage();
-        });
-    });
-
     acceptBtn.addEventListener('click', function() {
         alert('Customization accepted!');
         // Here you would typically send the configuration to a server or perform further actions
     });
 
-    cancelBtn.addEventListener('click', function() {
+    cancelBtn.addEventListener('click', resetCustomization);
+
+    resetBtn.addEventListener('click', resetCustomization);
+
+    function resetCustomization() {
         // Reset all options to default
         colorOptions.forEach(option => option.classList.remove('active'));
-        finishOptions.forEach(option => option.classList.remove('active'));
         document.querySelector('#background-colors .color-option[data-color="C95-GREEN"]').classList.add('active');
-        document.querySelector('#finish-options .finish-option:first-child').classList.add('active');
         document.querySelector('#color1-options .color-option:first-child').classList.add('active');
         document.querySelector('#color2-options .color-option:first-child').classList.add('active');
         document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
@@ -72,14 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Reset bikeColors object
         bikeColors.background = 'C95-GREEN';
-        bikeColors.finish = 'Mate';
-        bikeColors.color1 = 'C01-BLACK';
+        bikeColors.color1 = 'C105-BLACK';
         bikeColors.color2 = 'C01-BLACK';
         bikeColors.graphic1 = 'C01-BLACK';
         bikeColors.graphic2 = 'C01-BLACK';
 
         updateBikeImage();
-    });
+    }
 
     // Initial update
     updateBikeImage();
