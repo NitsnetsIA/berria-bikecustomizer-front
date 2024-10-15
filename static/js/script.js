@@ -14,13 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         layer6: 'XX'
     };
 
-    function setColorOptions() {
-        document.querySelectorAll('.color-option').forEach(option => {
-            const colorCode = option.dataset.hexColor;
-            option.style.backgroundColor = colors[colorCode.split('-')[0]];
-        });
-    }
-
     function updateBikeImage() {
         const parts = {
             layer0: '0-0',
@@ -35,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
         Object.keys(parts).forEach(part => {
             const imgElement = document.getElementById(`${part}-layer`);
             if (imgElement) {
-                imgElement.src = `/static/images/MAKO-${parts[part]}-${bikeColors[part]}-XX-XX-XX.png`;
+                const colorCode = bikeColors[part];
+                imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
             }
         });
         console.log('Current bike configuration:', bikeColors);
@@ -50,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         option.addEventListener('click', function() {
             const colorType = this.parentElement.id.replace('-options', '').replace('-colors', '');
             if (colorType !== 'layer0' && colorType !== 'layer6') {
-                bikeColors[colorType] = this.dataset.hexColor;
+                bikeColors[colorType] = this.dataset.color.split('-')[0];
                 setActiveOption(this.parentElement.querySelectorAll('.color-option'), this);
                 updateBikeImage();
             }
@@ -87,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBikeImage();
     }
 
-    // Initial setup
-    setColorOptions();
+    // Initial update
     updateBikeImage();
 });
