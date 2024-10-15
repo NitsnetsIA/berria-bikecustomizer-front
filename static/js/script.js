@@ -1,5 +1,3 @@
-import colorMappings from './colors.js';
-
 document.addEventListener('DOMContentLoaded', function() {
     const colorOptions = document.querySelectorAll('.color-option');
     const acceptBtn = document.getElementById('accept-btn');
@@ -31,10 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const imgElement = document.getElementById(`${part}-layer`);
             if (imgElement) {
                 const colorCode = bikeColors[part];
-                const colorObj = colorMappings.find(color => color.code === colorCode);
-                const hexColor = colorObj ? colorObj.hex : '#000000';
                 imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
-                imgElement.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${hexColor}) brightness(2)`;
             }
         });
         console.log('Current bike configuration:', bikeColors);
