@@ -25,18 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const imgElement = document.getElementById(`${part}-layer`);
             if (imgElement) {
                 const colorCode = bikeColors[part].split('-')[0];
-                const newSrc = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
-                imgElement.src = newSrc;
-                console.log(`Updated ${part} image: ${newSrc}`);
-
-                // Add error handling for missing images
-                imgElement.onerror = function() {
-                    console.error(`Failed to load image: ${newSrc}`);
-                    this.style.display = 'none';
-                };
-                imgElement.onload = function() {
-                    this.style.display = 'block';
-                };
+                imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
             }
         });
         console.log('Current bike configuration:', bikeColors);
@@ -69,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reset all options to default
         colorOptions.forEach(option => option.classList.remove('active'));
         document.querySelector('#background-colors .color-option[data-color="C95-GREEN"]').classList.add('active');
-        document.querySelector('#color1-options .color-option[data-color="C105-BLACK"]').classList.add('active');
-        document.querySelector('#color2-options .color-option[data-color="C01-BLACK"]').classList.add('active');
-        document.querySelector('#graphic1-options .color-option[data-color="C01-BLACK"]').classList.add('active');
-        document.querySelector('#graphic2-options .color-option[data-color="C01-BLACK"]').classList.add('active');
+        document.querySelector('#color1-options .color-option:first-child').classList.add('active');
+        document.querySelector('#color2-options .color-option:first-child').classList.add('active');
+        document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
+        document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
 
         // Reset bikeColors object
         bikeColors.background = 'C95-GREEN';
