@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const bikeColors = {
         layer0: 'XX',
-        background: 'C95',
+        background: 'C105',
         color1: 'C105',
         color2: 'C01',
         graphic1: 'C01',
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function resetCustomization() {
         // Reset all options to default
         colorOptions.forEach(option => option.classList.remove('active'));
-        document.querySelector('#background-colors .color-option[data-color="C95-GREEN"]').classList.add('active');
+        document.querySelector('#background-colors .color-option:first-child').classList.add('active');
         document.querySelector('#color1-options .color-option:first-child').classList.add('active');
         document.querySelector('#color2-options .color-option:first-child').classList.add('active');
         document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Reset bikeColors object
         bikeColors.layer0 = 'XX';
-        bikeColors.background = 'C95';
+        bikeColors.background = 'C105';
         bikeColors.color1 = 'C105';
         bikeColors.color2 = 'C01';
         bikeColors.graphic1 = 'C01';
