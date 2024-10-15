@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Update layer 0 and layer 6
-        document.getElementById('layer-0').src = '/static/images/MAKO-0-0-XX-XX-XX-XX.png';
-        document.getElementById('layer-6').src = '/static/images/MAKO-0-6-XX-XX-XX-XX.png';
+        document.getElementById('layer-0').src = '/static/images/MAKO-0-0-XX-XX-GRUPO1.png';
+        document.getElementById('layer-6').src = '/static/images/MAKO-0-6-XX-XX-RUEDAS1.png';
 
         Object.keys(parts).forEach(part => {
             const imgElement = document.getElementById(`${part}-layer`);
