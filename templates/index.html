@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bicycle Customizer</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">MAKO PRO XT</h1>
+        <p>Reference: SUMPS.352A.2E.1 EAN: 3434343434343423</p>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div id="bike-container" class="position-relative">
+                    <img src="{{ url_for('static', filename='images/bike_base.png') }}" alt="Bike Base" class="img-fluid">
+                    <img id="color1-layer" src="{{ url_for('static', filename='images/bike_color1.png') }}" alt="Color 1" class="img-fluid position-absolute top-0 start-0">
+                    <img id="color2-layer" src="{{ url_for('static', filename='images/bike_color2.png') }}" alt="Color 2" class="img-fluid position-absolute top-0 start-0">
+                    <img id="graphic1-layer" src="{{ url_for('static', filename='images/bike_graphic1.png') }}" alt="Graphic 1" class="img-fluid position-absolute top-0 start-0">
+                    <img id="graphic2-layer" src="{{ url_for('static', filename='images/bike_graphic2.png') }}" alt="Graphic 2" class="img-fluid position-absolute top-0 start-0">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Colores y acabados</h2>
+                <div class="mb-3">
+                    <h3>Fondo</h3>
+                    <div id="background-colors" class="d-flex flex-wrap">
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option active" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h3>Acabado</h3>
+                    <div id="finish-options" class="d-flex flex-wrap">
+                        <div class="finish-option active" data-finish="Mate">Mate</div>
+                        <div class="finish-option" data-finish="Brillo">Brillo</div>
+                        <div class="finish-option" data-finish="SATINADO">SATINADO</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h3>Color 1</h3>
+                    <div id="color1-options" class="d-flex flex-wrap">
+                        <div class="color-option active" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h3>Color 2</h3>
+                    <div id="color2-options" class="d-flex flex-wrap">
+                        <div class="color-option active" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h3>Gráfica 1</h3>
+                    <div id="graphic1-options" class="d-flex flex-wrap">
+                        <div class="color-option active" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h3>Gráfica 2</h3>
+                    <div id="graphic2-options" class="d-flex flex-wrap">
+                        <div class="color-option active" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                        <div class="color-option" data-color="C01-BLACK"></div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button id="accept-btn" class="btn btn-primary me-2">ACEPTAR PERSONALIZACIÓN</button>
+                    <button id="cancel-btn" class="btn btn-secondary">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

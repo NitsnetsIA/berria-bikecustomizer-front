@@ -1,0 +1,72 @@
+.color-option,
+.finish-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-option.active,
+.finish-option.active {
+    border-color: var(--bs-primary);
+}
+
+.color-option::after,
+.finish-option::after {
+    content: '✓';
+    color: white;
+    font-weight: bold;
+    display: none;
+}
+
+.color-option.active::after,
+.finish-option.active::after {
+    display: block;
+}
+
+.finish-option {
+    width: auto;
+    padding: 0 10px;
+    border-radius: 20px;
+    background-color: var(--bs-secondary);
+    color: var(--bs-light);
+}
+
+#bike-container {
+    max-width: 100%;
+    height: auto;
+}
+
+#bike-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Example colors for demonstration purposes */
+#background-colors .color-option:nth-child(1) { background-color: #000; }
+#background-colors .color-option:nth-child(2) { background-color: #333; }
+#background-colors .color-option:nth-child(3) { background-color: #666; }
+#background-colors .color-option:nth-child(4) { background-color: #999; }
+#background-colors .color-option:nth-child(5) { background-color: #ccc; }
+#background-colors .color-option:nth-child(6) { background-color: #fff; }
+
+#color1-options .color-option:nth-child(1) { background-color: #0000ff; }
+#color1-options .color-option:nth-child(2) { background-color: #00ff00; }
+#color1-options .color-option:nth-child(3) { background-color: #ff0000; }
+
+#color2-options .color-option:nth-child(1) { background-color: #ff00ff; }
+#color2-options .color-option:nth-child(2) { background-color: #ffff00; }
+#color2-options .color-option:nth-child(3) { background-color: #00ffff; }
+
+#graphic1-options .color-option:nth-child(1) { background-color: #800080; }
+#graphic1-options .color-option:nth-child(2) { background-color: #008080; }
+#graphic1-options .color-option:nth-child(3) { background-color: #808000; }
+
+#graphic2-options .color-option:nth-child(1) { background-color: #f0f; }
+#graphic2-options .color-option:nth-child(2) { background-color: #0ff; }
+#graphic2-options .color-option:nth-child(3) { background-color: #ff0; }
