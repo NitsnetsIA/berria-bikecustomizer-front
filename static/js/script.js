@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const bikeColors = {
         layer0: 'XX',
-        background: 'C95-GREEN',
-        color1: 'C105-BLACK',
-        color2: 'C01-BLACK',
-        graphic1: 'C01-BLACK',
-        graphic2: 'C01-BLACK',
+        background: 'C95',
+        color1: 'C105',
+        color2: 'C01',
+        graphic1: 'C01',
+        graphic2: 'C01',
         layer6: 'XX'
     };
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         option.addEventListener('click', function() {
             const colorType = this.parentElement.id.replace('-options', '').replace('-colors', '');
             if (colorType !== 'layer0' && colorType !== 'layer6') {
-                bikeColors[colorType] = this.dataset.color;
+                bikeColors[colorType] = this.dataset.color.split('-')[0];
                 setActiveOption(this.parentElement.querySelectorAll('.color-option'), this);
                 updateBikeImage();
             }
@@ -71,11 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Reset bikeColors object
         bikeColors.layer0 = 'XX';
-        bikeColors.background = 'C95-GREEN';
-        bikeColors.color1 = 'C105-BLACK';
-        bikeColors.color2 = 'C01-BLACK';
-        bikeColors.graphic1 = 'C01-BLACK';
-        bikeColors.graphic2 = 'C01-BLACK';
+        bikeColors.background = 'C95';
+        bikeColors.color1 = 'C105';
+        bikeColors.color2 = 'C01';
+        bikeColors.graphic1 = 'C01';
+        bikeColors.graphic2 = 'C01';
         bikeColors.layer6 = 'XX';
 
         updateBikeImage();
