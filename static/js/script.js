@@ -25,7 +25,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const imgElement = document.getElementById(`${part}-layer`);
             if (imgElement) {
                 const colorCode = bikeColors[part].split('-')[0];
-                imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
+                const newSrc = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
+                imgElement.src = newSrc;
+                console.log(`Updated ${part} image: ${newSrc}`);
+
+                // Add error handling for missing images
+                imgElement.onerror = function() {
+                    console.error(`Failed to load image: ${newSrc}`);
+                    this.style.display = 'none';
+                };
+                imgElement.onload = function() {
+                    this.style.display = 'block';
+                };
             }
         });
         console.log('Current bike configuration:', bikeColors);
