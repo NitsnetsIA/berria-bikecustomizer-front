@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', function() {
         layer6: 'XX'
     };
 
+    function setColorOptions() {
+        document.querySelectorAll('.color-option').forEach(option => {
+            const colorCode = option.dataset.hexColor;
+            option.style.backgroundColor = colors[colorCode];
+        });
+    }
+
     function updateBikeImage() {
         const parts = {
             layer0: '0-0',
@@ -81,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBikeImage();
     }
 
-    // Initial update
+    // Initial setup
+    setColorOptions();
     updateBikeImage();
 });

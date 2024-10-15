@@ -6,6 +6,8 @@
     <title>Bicycle Customizer</title>
     <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/colors.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
     <div class="container mt-5">
@@ -33,48 +35,48 @@
                 <div class="mb-3">
                     <h3>Background</h3>
                     <div id="background-colors" class="d-flex flex-wrap">
-                        <div class="color-option active" data-color="C105" style="background-color: colors['C105'];"></div>
-                        <div class="color-option" data-color="C86" style="background-color: colors['C86'];"></div>
-                        <div class="color-option" data-color="C88" style="background-color: colors['C88'];"></div>
-                        <div class="color-option" data-color="C93" style="background-color: colors['C93'];"></div>
-                        <div class="color-option" data-color="C95" style="background-color: colors['C95'];"></div>
-                        <div class="color-option" data-color="C94" style="background-color: colors['C94'];"></div>
+                        <div class="color-option active" data-color="C105" data-hex-color="C105"></div>
+                        <div class="color-option" data-color="C86" data-hex-color="C86"></div>
+                        <div class="color-option" data-color="C88" data-hex-color="C88"></div>
+                        <div class="color-option" data-color="C93" data-hex-color="C93"></div>
+                        <div class="color-option" data-color="C95" data-hex-color="C95"></div>
+                        <div class="color-option" data-color="C94" data-hex-color="C94"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <h3>Color 1</h3>
                     <div id="color1-options" class="d-flex flex-wrap">
-                        <div class="color-option active" data-color="C105" style="background-color: colors['C105'];"></div>
-                        <div class="color-option" data-color="C83" style="background-color: colors['C83'];"></div>
-                        <div class="color-option" data-color="C84" style="background-color: colors['C84'];"></div>
-                        <div class="color-option" data-color="C86" style="background-color: colors['C86'];"></div>
-                        <div class="color-option" data-color="C88" style="background-color: colors['C88'];"></div>
+                        <div class="color-option active" data-color="C105" data-hex-color="C105"></div>
+                        <div class="color-option" data-color="C83" data-hex-color="C83"></div>
+                        <div class="color-option" data-color="C84" data-hex-color="C84"></div>
+                        <div class="color-option" data-color="C86" data-hex-color="C86"></div>
+                        <div class="color-option" data-color="C88" data-hex-color="C88"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <h3>Color 2</h3>
                     <div id="color2-options" class="d-flex flex-wrap">
-                        <div class="color-option active" data-color="C01" style="background-color: colors['C01'];"></div>
-                        <div class="color-option" data-color="C22" style="background-color: colors['C22'];"></div>
-                        <div class="color-option" data-color="C34" style="background-color: colors['C34'];"></div>
-                        <div class="color-option" data-color="C62" style="background-color: colors['C62'];"></div>
-                        <div class="color-option" data-color="C75" style="background-color: colors['C75'];"></div>
+                        <div class="color-option active" data-color="C01" data-hex-color="C01"></div>
+                        <div class="color-option" data-color="C22" data-hex-color="C22"></div>
+                        <div class="color-option" data-color="C34" data-hex-color="C34"></div>
+                        <div class="color-option" data-color="C62" data-hex-color="C62"></div>
+                        <div class="color-option" data-color="C75" data-hex-color="C75"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <h3>Graphic 1</h3>
                     <div id="graphic1-options" class="d-flex flex-wrap">
-                        <div class="color-option active" data-color="C01" style="background-color: colors['C01'];"></div>
-                        <div class="color-option" data-color="C02" style="background-color: colors['C02'];"></div>
-                        <div class="color-option" data-color="C22" style="background-color: colors['C22'];"></div>
+                        <div class="color-option active" data-color="C01" data-hex-color="C01"></div>
+                        <div class="color-option" data-color="C02" data-hex-color="C02"></div>
+                        <div class="color-option" data-color="C22" data-hex-color="C22"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <h3>Graphic 2</h3>
                     <div id="graphic2-options" class="d-flex flex-wrap">
-                        <div class="color-option active" data-color="C01" style="background-color: colors['C01'];"></div>
-                        <div class="color-option" data-color="C02" style="background-color: colors['C02'];"></div>
-                        <div class="color-option" data-color="C22" style="background-color: colors['C22'];"></div>
+                        <div class="color-option active" data-color="C01" data-hex-color="C01"></div>
+                        <div class="color-option" data-color="C02" data-hex-color="C02"></div>
+                        <div class="color-option" data-color="C22" data-hex-color="C22"></div>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -89,7 +91,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/colors.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
