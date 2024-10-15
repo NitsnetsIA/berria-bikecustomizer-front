@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetBtn = document.getElementById('reset-btn');
 
     const bikeColors = {
-        layer0: 'C01-BLACK',
+        layer0: 'XX',
         background: 'C95-GREEN',
         color1: 'C105-BLACK',
         color2: 'C01-BLACK',
         graphic1: 'C01-BLACK',
         graphic2: 'C01-BLACK',
-        layer6: 'C01-BLACK'
+        layer6: 'XX'
     };
 
     function updateBikeImage() {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Object.keys(parts).forEach(part => {
             const imgElement = document.getElementById(`${part}-layer`);
             if (imgElement) {
-                const colorCode = bikeColors[part].split('-')[0];
+                const colorCode = bikeColors[part];
                 imgElement.src = `/static/images/MAKO-${parts[part]}-${colorCode}-XX-XX-XX.png`;
             }
         });
@@ -43,9 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
     colorOptions.forEach(option => {
         option.addEventListener('click', function() {
             const colorType = this.parentElement.id.replace('-options', '').replace('-colors', '');
-            bikeColors[colorType] = this.dataset.color;
-            setActiveOption(this.parentElement.querySelectorAll('.color-option'), this);
-            updateBikeImage();
+            if (colorType !== 'layer0' && colorType !== 'layer6') {
+                bikeColors[colorType] = this.dataset.color;
+                setActiveOption(this.parentElement.querySelectorAll('.color-option'), this);
+                updateBikeImage();
+            }
         });
     });
 
@@ -61,22 +63,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function resetCustomization() {
         // Reset all options to default
         colorOptions.forEach(option => option.classList.remove('active'));
-        document.querySelector('#layer0-options .color-option:first-child').classList.add('active');
         document.querySelector('#background-colors .color-option[data-color="C95-GREEN"]').classList.add('active');
         document.querySelector('#color1-options .color-option:first-child').classList.add('active');
         document.querySelector('#color2-options .color-option:first-child').classList.add('active');
         document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
         document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
-        document.querySelector('#layer6-options .color-option:first-child').classList.add('active');
 
         // Reset bikeColors object
-        bikeColors.layer0 = 'C01-BLACK';
+        bikeColors.layer0 = 'XX';
         bikeColors.background = 'C95-GREEN';
         bikeColors.color1 = 'C105-BLACK';
         bikeColors.color2 = 'C01-BLACK';
         bikeColors.graphic1 = 'C01-BLACK';
         bikeColors.graphic2 = 'C01-BLACK';
-        bikeColors.layer6 = 'C01-BLACK';
+        bikeColors.layer6 = 'XX';
 
         updateBikeImage();
     }
