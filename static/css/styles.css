@@ -1,5 +1,4 @@
-.color-option,
-.finish-option {
+.color-option {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -11,30 +10,19 @@
     justify-content: center;
 }
 
-.color-option.active,
-.finish-option.active {
+.color-option.active {
     border-color: var(--bs-primary);
 }
 
-.color-option::after,
-.finish-option::after {
+.color-option::after {
     content: '✓';
     color: white;
     font-weight: bold;
     display: none;
 }
 
-.color-option.active::after,
-.finish-option.active::after {
+.color-option.active::after {
     display: block;
-}
-
-.finish-option {
-    width: auto;
-    padding: 0 10px;
-    border-radius: 20px;
-    background-color: var(--bs-secondary);
-    color: var(--bs-light);
 }
 
 #bike-container {
@@ -51,19 +39,11 @@
     left: 0;
 }
 
-#bike-container #layer-0 {
-    position: relative;
-    z-index: 1;
-}
-
-#bike-container #layer-6 {
-    z-index: 7;
-}
-
 /* Color options */
-.color-option[data-color="C01-BLACK"] { background-color: #000000; }
-.color-option[data-color="C02-WHITE"] { background-color: #FFFFFF; }
-.color-option[data-color="C03-RED"] { background-color: #FF0000; }
-.color-option[data-color="C04-BLUE"] { background-color: #0000FF; }
-.color-option[data-color="C05-GREEN"] { background-color: #00FF00; }
-.color-option[data-color="C06-YELLOW"] { background-color: #FFFF00; }
+.color-option[data-color^="C01"] { background-color: #000000; }
+.color-option[data-color^="C02"], .color-option[data-color^="C83"], .color-option[data-color^="C86"] { background-color: #FFFFFF; }
+.color-option[data-color^="C22"], .color-option[data-color^="C34"], .color-option[data-color^="C84"], .color-option[data-color^="C88"] { background-color: #FF0000; }
+.color-option[data-color^="C62"], .color-option[data-color^="C93"] { background-color: #0000FF; }
+.color-option[data-color^="C75"], .color-option[data-color^="C95"] { background-color: #00FF00; }
+.color-option[data-color^="C94"] { background-color: #FFFF00; }
+.color-option[data-color^="C105"] { background-color: #000000; }
