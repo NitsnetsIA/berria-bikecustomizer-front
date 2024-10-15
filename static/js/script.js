@@ -4,24 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelBtn = document.getElementById('cancel-btn');
     const resetBtn = document.getElementById('reset-btn');
 
-    const colorMapping = {
-        'C01': '#000000', // BLACK / BLACK EBONY
-        'C02': '#FFFFFF', // WHITE / WHITE SNOW
-        'C03': '#FF0000', // ROJO
-        'C22': '#FFA500', // ORANGE
-        'C34': '#FF69B4', // PINK
-        'C62': '#0000FF', // BLUE
-        'C75': '#008000', // GREEN
-        'C83': '#FFFAFA', // SNOW WHITE
-        'C84': '#DC143C', // CRIMSON
-        'C86': '#4169E1', // ROYAL BLUE
-        'C88': '#32CD32', // LIME GREEN
-        'C93': '#1E90FF', // DODGER BLUE
-        'C94': '#FFD700', // GOLD
-        'C95': '#00FF00', // LIME
-        'C105': '#1A1A1A', // DARK GRAY
-    };
-
     const bikeColors = {
         layer0: 'XX',
         background: 'C105',
