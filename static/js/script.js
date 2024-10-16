@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const acceptBtn = document.getElementById('accept-btn');
     const cancelBtn = document.getElementById('cancel-btn');
     const resetBtn = document.getElementById('reset-btn');
+    let layerImages = {};
 
     const bikeColors = {
         layer0: 'XX',
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const colorCodes = [
-        { code: "C01", hex: "#000000", desc: "BLACK" }, 
+        { code: "C01", hex: "#000000", desc: "BLACK" },
         { code: "C01", hex: "#0C0C0C", desc: "BLACK EBONY" },
         { code: "C02", hex: "#FFFFFF", desc: "WHITE" },
         { code: "C02", hex: "#FFFAFA", desc: "WHITE SNOW" },
@@ -188,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { layer: 4, colors: ["C01", "C02", "C22"] }, // graphic1-options
         { layer: 5, colors: ["C01", "C02", "C22"] }  // graphic2-options
     ];
-    
+
       // Inicializa el SDK de Google Identity Services
           function initGoogleSignIn() {
 
@@ -260,10 +261,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function createColorOptions(containerId, layer) {
         const container = document.getElementById(containerId);
         container.innerHTML = ''; // Limpiar el contenido actual
-    
+
         // Buscar los colores asociados a la capa en el array "layers"
         const layerColors = layers.find(l => l.layer === layer).colors;
-    
+
         // Crear los divs de color
         layerColors.forEach(colorCode => {
             color = colorCodes.find(color => color.code === colorCode)
@@ -275,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(div);
         });
     }
-    
+
     // Llamar a la función para cada capa
     createColorOptions('background-colors', 1); // Capa 1 para el fondo
     createColorOptions('color1-options', 2);    // Capa 2 para color1
@@ -283,7 +284,6 @@ document.addEventListener('DOMContentLoaded', function() {
     createColorOptions('graphic1-options', 4);  // Capa 4 para gráfico 1
     createColorOptions('graphic2-options', 5);  // Capa 5 para gráfico 2
     let colorOptions = document.querySelectorAll('.color-option');
-
 
     function updateBikeImage() {
         const parts = {
@@ -311,6 +311,130 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedOption.classList.add('active');
     }
 
+    function updateLayers() {
+        fetch('/get_images_list')
+            .then(response => response.json())
+            .then(data => {
+                if (data.images) {
+                    updateLayerSelectors(data.images);
+                } else {
+                    console.error('Error obteniendo la lista de imágenes:', data.error);
+                }
+            })
+            .catch(error => console.error('Error al obtener la lista de imágenes:', error));
+    }
+
+    function updateLayerSelectors(images) {
+
+        // layerImages = images.reduce((layers, imageName) => {
+        //     const parts = imageName.split('-');
+        //     if (parts.length >= 3) {
+        //         const layer = `capa-${parts[2]}`;
+        //         if (!layers[layer]) {
+        //             layers[layer] = [];
+        //         }
+        //         layers[layer].push(imageName);
+        //     }
+        //     return layers;
+        // }, {});
+
+        layerImages = images.reduce((layers, imageName) => {
+            const parts = imageName.split('-');
+            if (parts.length >= 6) {
+                const bikeName = parts[0];
+                const view = parts[1];
+                const layer = parts[2];
+                const color = parts[3];
+                const finish = parts[4];
+                
+                if (!layers[bikeName]) {
+                    layers[bikeName] = {};
+                }
+                if (!layers[bikeName][view]) {
+                    layers[bikeName][view] = {};
+                }
+                if (!layers[bikeName][view][layer]) {
+                    layers[bikeName][view][layer] = {};
+                }
+                if (!layers[bikeName][view][layer][color]) {
+                    layers[bikeName][view][layer][color] = [];
+                }
+        
+                layers[bikeName][view][layer][color].push({
+                    imageName: imageName,
+                    finish: finish
+                });
+            }
+            return layers;
+        }, {});
+        
+        console.log('Layer images:', layerImages);
+
+        const bikeNames = Object.keys(layerImages);
+        console.log(bikeNames);
+        const bikeViews = Object.keys(layerImages['MAKO']);
+        console.log(bikeViews);
+        const bikeLayers = Object.keys(layerImages['MAKO'][0]);
+        console.log(bikeLayers);
+        
+        console.log("++++++++++++++++++");
+
+        // Create a color selector for each layer
+        for (let k = 0; k < bikeLayers.length; k++) {
+
+            const bikeColors = Object.keys(layerImages['MAKO'][0][k]);
+            layerHtml = '';
+            layerHtml += `<div class="mb-3">`;
+
+            if (bikeColors[0] === 'XX') {
+                layerHtml += `<h3>Layer ${bikeLayers[k]} (Fixed)</h3>
+                <p>This layer has a fixed color and cannot be customized.</p>`
+            }else{
+
+                layerHtml += `<h3> Layer ${bikeLayers[k]}</h3>`;
+                layerHtml += `<div id="layer${bikeLayers[k]}-options" class="d-flex flex-wrap">`;
+
+            for (let l = 0; l < bikeColors.length; l++) {
+
+                color = colorCodes.find(color => color.code === bikeColors[l])
+                const div = document.createElement('div');
+                div.className = 'color-option';
+                div.setAttribute('title', `${color.desc}`);
+                div.setAttribute('data-color', `${color.code}`);
+                div.style.backgroundColor = color.hex; // Asignar el color hexadecimal
+                layerHtml += div.outerHTML;
+                
+            }}
+
+            layerHtml += `</div>`;
+            document.getElementById('layers-container').innerHTML += layerHtml;
+        }
+
+        console.log(layerHtml);
+
+        return;
+
+        const layersContainer = document.getElementById('layers-container');
+        layersContainer.innerHTML = ''; // Limpiar contenido
+
+        Object.keys(layerImages).forEach(layer => {
+            const div = document.createElement('div');
+            div.classList.add('layer');
+            div.innerHTML = `<h3>${layer}</h3>`;
+            layerImages[layer].forEach(image => {
+                const imgDiv = document.createElement('div');
+                imgDiv.classList.add('image-option');
+                imgDiv.style.backgroundImage = `url('/static/images/${image}')`;
+                imgDiv.setAttribute('data-image', image);
+                imgDiv.addEventListener('click', function () {
+                    updateBikeLayer(layer, image);
+                });
+                div.appendChild(imgDiv);
+            });
+            layersContainer.appendChild(div);
+        });
+    }
+
     acceptBtn.addEventListener('click', function() {
         alert('Customization accepted!');
         // Here you would typically send the configuration to a server or perform further actions
@@ -330,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
         document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
 
-        // Reset bikeColors object 
+        // Reset bikeColors object
         bikeColors.layer0 = 'XX';
         bikeColors.background = document.querySelector('#background-colors .color-option:first-child').getAttribute('data-color');
         bikeColors.color1 = document.querySelector('#color1-options .color-option:first-child').getAttribute('data-color');
@@ -354,6 +478,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Initial update
+    updateLayers();
     resetCustomization();
 
 });

@@ -7,7 +7,7 @@ from googleapiclient.errors import HttpError
 
 app = Flask(__name__)
 
-def update_images_from_drive(access_token, folder_id, images_dir='images'):
+def update_images_from_drive(access_token, folder_id, images_dir='static/images'):
     try:
         # Crear las credenciales utilizando el token de acceso
         creds = Credentials(token=access_token)
@@ -68,5 +68,16 @@ def update_images():
     update_images_from_drive(access_token, folder_id)
     return jsonify({'status': 'Imágenes actualizadas con éxito'})
 
+@app.route('/get_images_list', methods=['GET'])
+def get_images_list():
+    images_dir = 'static/images'
+    try:
+        # Obtener la lista de archivos en la carpeta /images
+        images = os.listdir(images_dir) if os.path.exists(images_dir) else []
+        return jsonify({'images': images})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
