@@ -1,4 +1,78 @@
+
+let accessToken = '';
+const folderId = '1_9AfIlKX_lOF0uRZoSBzYQI_R7AJ2gXd';
+const client_id = '297903435633-jim9ju0srggs9akerf9s44hs7ojh2ucm.apps.googleusercontent.com'
+
+
+  // Inicializa el SDK de Google Identity Services
+  function initGoogleSignIn() {
+
+    if (accessToken == '')
+    {
+
+    google.accounts.id.initialize({
+        client_id: client_id,
+        callback: handleCredentialResponse
+    });
+
+    google.accounts.id.prompt(); // Muestra el cuadro de inicio de sesión cuando es necesario
+
+    }else{
+        updateImagesOnServer(accessToken, folderId)
+    }
+}
+
+// Maneja la respuesta de autenticación
+function handleCredentialResponse(response) {
+    console.log('Token JWT recibido: ', response.credential);
+    getAccessToken();
+}
+
+// Función para obtener el token de acceso (Access Token) de Google OAuth 2.0
+function getAccessToken() {
+    google.accounts.oauth2.initTokenClient({
+        client_id: client_id,
+        scope: 'https://www.googleapis.com/auth/drive.readonly',
+        callback: (response) => {
+            accessToken = response.access_token;
+            console.log('Token de acceso obtenido:', accessToken);
+
+            // Ahora sincronizamos las imagenes
+            updateImagesOnServer(accessToken, folderId);
+        },
+    }).requestAccessToken();
+}
+
+
+function updateImagesOnServer(accessToken, folderId) {
+    fetch('/update_images', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            access_token: accessToken,
+            folder_id: folderId
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la solicitud: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Respuesta del servidor:', data);
+        alert('Las imágenes se han actualizado con éxito.');
+    })
+    .catch(error => {
+        console.error('Error al actualizar las imágenes:', error);
+        alert('Hubo un problema al actualizar las imágenes.');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+
     const acceptBtn = document.getElementById('accept-btn');
     const cancelBtn = document.getElementById('cancel-btn');
     const resetBtn = document.getElementById('reset-btn');
@@ -115,6 +189,74 @@ document.addEventListener('DOMContentLoaded', function() {
         { layer: 5, colors: ["C01", "C02", "C22"] }  // graphic2-options
     ];
     
+      // Inicializa el SDK de Google Identity Services
+          function initGoogleSignIn() {
+
+            if (accessToken == '')
+            {
+
+            google.accounts.id.initialize({
+                client_id: client_id,
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.prompt(); // Muestra el cuadro de inicio de sesión cuando es necesario
+
+            }else{
+                updateImagesOnServer(accessToken, folderId)
+            }
+        }
+
+        // Maneja la respuesta de autenticación
+        function handleCredentialResponse(response) {
+            console.log('Token JWT recibido: ', response.credential);
+            getAccessToken();
+        }
+
+        // Función para obtener el token de acceso (Access Token) de Google OAuth 2.0
+        function getAccessToken() {
+            google.accounts.oauth2.initTokenClient({
+                client_id: client_id,
+                scope: 'https://www.googleapis.com/auth/drive.readonly',
+                callback: (response) => {
+                    accessToken = response.access_token;
+                    console.log('Token de acceso obtenido:', accessToken);
+
+                    // Ahora sincronizamos las imagenes
+                    updateImagesOnServer(accessToken, folderId);
+                },
+            }).requestAccessToken();
+        }
+
+
+        function updateImagesOnServer(accessToken, folderId) {
+            fetch('/update_images', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_token: accessToken,
+                    folder_id: folderId
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Respuesta del servidor:', data);
+                alert('Las imágenes se han actualizado con éxito.');
+            })
+            .catch(error => {
+                console.error('Error al actualizar las imágenes:', error);
+                alert('Hubo un problema al actualizar las imágenes.');
+            });
+        }
+
+
     function createColorOptions(containerId, layer) {
         const container = document.getElementById(containerId);
         container.innerHTML = ''; // Limpiar el contenido actual
@@ -127,7 +269,8 @@ document.addEventListener('DOMContentLoaded', function() {
             color = colorCodes.find(color => color.code === colorCode)
             const div = document.createElement('div');
             div.className = 'color-option';
-            div.setAttribute('data-color', `${color.code}-${color.desc}`);
+            div.setAttribute('title', `${color.desc}`);
+            div.setAttribute('data-color', `${color.code}`);
             div.style.backgroundColor = color.hex; // Asignar el color hexadecimal
             container.appendChild(div);
         });
@@ -168,6 +311,37 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedOption.classList.add('active');
     }
 
+    acceptBtn.addEventListener('click', function() {
+        alert('Customization accepted!');
+        // Here you would typically send the configuration to a server or perform further actions
+    });
+
+    cancelBtn.addEventListener('click', resetCustomization);
+
+    resetBtn.addEventListener('click', resetCustomization);
+
+    function resetCustomization() {
+
+        // Reset all options to default
+        colorOptions.forEach(option => option.classList.remove('active'));
+        document.querySelector('#background-colors .color-option:first-child').classList.add('active');
+        document.querySelector('#color1-options .color-option:first-child').classList.add('active');
+        document.querySelector('#color2-options .color-option:first-child').classList.add('active');
+        document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
+        document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
+
+        // Reset bikeColors object 
+        bikeColors.layer0 = 'XX';
+        bikeColors.background = document.querySelector('#background-colors .color-option:first-child').getAttribute('data-color');
+        bikeColors.color1 = document.querySelector('#color1-options .color-option:first-child').getAttribute('data-color');
+        bikeColors.color2 = document.querySelector('#color2-options .color-option:first-child').getAttribute('data-color');
+        bikeColors.graphic1 = document.querySelector('#graphic1-options .color-option:first-child').getAttribute('data-color');
+        bikeColors.graphic2 = document.querySelector('#graphic2-options .color-option:first-child').getAttribute('data-color');
+        bikeColors.layer6 = 'XX';
+
+        updateBikeImage();
+    }
+
     colorOptions.forEach(option => {
         option.addEventListener('click', function() {
             const colorType = this.parentElement.id.replace('-options', '').replace('-colors', '');
@@ -179,43 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    acceptBtn.addEventListener('click', function() {
-        alert('Customization accepted!');
-        // Here you would typically send the configuration to a server or perform further actions
-    });
-
-    cancelBtn.addEventListener('click', resetCustomization);
-
-    resetBtn.addEventListener('click', resetCustomization);
-
-    function resetCustomization() {
-        // Reset all options to default
-        colorOptions.forEach(option => option.classList.remove('active'));
-        document.querySelector('#background-colors .color-option:first-child').classList.add('active');
-        document.querySelector('#color1-options .color-option:first-child').classList.add('active');
-        document.querySelector('#color2-options .color-option:first-child').classList.add('active');
-        document.querySelector('#graphic1-options .color-option:first-child').classList.add('active');
-        document.querySelector('#graphic2-options .color-option:first-child').classList.add('active');
-
-        // Reset bikeColors object 
-        bikeColors.layer0 = 'XX';
-        bikeColors.background = 'C105';
-        bikeColors.color1 = 'C105';
-        bikeColors.color2 = 'C01';
-        bikeColors.graphic1 = 'C01';
-        bikeColors.graphic2 = 'C01';
-        bikeColors.layer6 = 'XX';
-
-        updateBikeImage();
-    }
-
-    // Asumimos que el archivo colors.js contiene el array colorCodes
-// Ya que colorCodes está disponible, se usará para rellenar los colores dinámicamente
-
-
-
     // Initial update
-    updateBikeImage();
-
+    resetCustomization();
 
 });
