@@ -11,19 +11,9 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">MAKO PRO XT</h1>
-        <p>Reference: SUMPS.352A.2E.1 EAN: 1114343434343423</p>
-        <button onclick="initGoogleSignIn()">Authenticate and Load Images</button>
-        
         <div class="row">
             <div class="col-md-8">
                 <div id="bike-container" class="position-relative">
-                    <img id="layer0-layer" src="{{ url_for('static', filename='images/MAKO-0-0-XX-XX-XX-XX.png') }}" alt="Layer 0" class="img-fluid position-absolute top-0 start-0">
-                    <img id="background-layer" src="" alt="Bike Background" class="img-fluid">
-                    <img id="color1-layer" src="" alt="Color 1" class="img-fluid position-absolute top-0 start-0">
-                    <img id="color2-layer" src="" alt="Color 2" class="img-fluid position-absolute top-0 start-0">
-                    <img id="graphic1-layer" src="" alt="Graphic 1" class="img-fluid position-absolute top-0 start-0">
-                    <img id="graphic2-layer" src="" alt="Graphic 2" class="img-fluid position-absolute top-0 start-0">
-                    <img id="layer6-layer" src="" alt="Layer 6" class="img-fluid position-absolute top-0 start-0">
                 </div>
             </div>
             <div  class="col-md-4">
@@ -32,50 +22,17 @@
 
                 <div id="layers-container">
                 
-                <div class="mb-3">
-                    <h3>Layer 0 (Fixed)</h3>
-                    <p>This layer has a fixed color and cannot be customized.</p>
-                </div>
-                <div class="mb-3">
-                    <h3>Background</h3>
-                    <div id="background-colors" class="d-flex flex-wrap">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h3>Color 1</h3>
-                    <div id="color1-options" class="d-flex flex-wrap">
-                    </div>
-                </div>
-                <div class="mb-3"> 
-                    <h3>Color 2</h3>
-                    <div id="color2-options" class="d-flex flex-wrap">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h3>Graphic 1</h3>
-                    <div id="graphic1-options" class="d-flex flex-wrap">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h3>Graphic 2</h3>
-                    <div id="graphic2-options" class="d-flex flex-wrap">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h3>Layer 6 (Fixed)</h3>
-                    <p>This layer has a fixed color and cannot be customized.</p>
-                </div>
-
                 </div>
 
                 <div class="mt-4">
-                    <button id="accept-btn" class="btn btn-primary me-2">Accept Customization</button>
-                    <button id="cancel-btn" class="btn btn-secondary me-2">Cancel</button>
+                    <button onclick="initGoogleSignIn()" class="btn btn-secondary me-2">Authenticate and Load Images</button>
                     <button id="reset-btn" class="btn btn-warning">Reset</button>
                 </div>
             </div>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/googledrive.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/colors.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <!-- Modal de Carga -->
