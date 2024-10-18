@@ -1,4 +1,4 @@
-#!/home/josh/berria-bikecustomizer-front/venv/bin/python3
+#!/home/josh/berria-bikecustomizer-front/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

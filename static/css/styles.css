@@ -1,3 +1,19 @@
+/* Cambia el fondo a blanco */
+body {
+    background-color: #FFFFFF;
+    color: #000000; /* Color de texto general en negro */
+}
+
+/* Asegúrate de que los titulares estén en negro */
+h1, h2, h3, h4, h5, h6 {
+    color: #000000;
+}
+
+/* Opcionalmente puedes ajustar los textos específicos dentro del modal */
+#loadingModal .modal-content {
+    color: #000000; /* Cambia el texto del modal a negro */
+}
+
 .color-option,
 .finish-option {
     width: 40px;
@@ -63,7 +79,6 @@
 .color-option[data-color="C05-GREEN"] { background-color: #00FF00; }
 .color-option[data-color="C06-YELLOW"] { background-color: #FFFF00; }
 
-
 #loadingModal {
     position: fixed;
     top: 0;
@@ -80,7 +95,7 @@
 #loadingModal .modal-content {
     background: none;
     border: none;
-    color: white;
+    color: #000000; /* Cambia el texto del modal a negro */
     text-align: center;
     display: flex;
     flex-direction: column;
