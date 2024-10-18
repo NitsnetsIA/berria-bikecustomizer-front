@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let imagesCND = '';
 
     // if current domain is berria-bikecustomizer.servidorbeta.com uses CND images if not put '' on imagesCND
-    if (window.location.hostname === 'berria-bikecustomizer-front.servidorbeta.com') {
-        const imagesCND = 'https://cdn-berria-bikecustomizer.static-servidorbeta.com/cdn-cgi/image/width=800,height=800,quality=90/';}
+    if (window.location.hostname === 'berria-bikecustomizer-front.servidorbeta.com') 
+        imagesCND = 'https://cdn-berria-bikecustomizer.static-servidorbeta.com/cdn-cgi/image/width=800,height=800,quality=90/';
   
     let layerImages = {};
     let currentBike = 'MAKO';
