@@ -1,4 +1,5 @@
 const colorCodes = [
+    { code: "XX", hex: "#000000", desc: "NO-COLOR" },
     { code: "C01", hex: "#000000", desc: "BLACK" },
     { code: "C01", hex: "#0C0C0C", desc: "BLACK EBONY" },
     { code: "C02", hex: "#FFFFFF", desc: "WHITE" },

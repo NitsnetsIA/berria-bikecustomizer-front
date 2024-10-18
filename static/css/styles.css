@@ -21,10 +21,13 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50%;
     margin: 5px;
     cursor: pointer;
-    border: 2px solid transparent;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.color-option[data-color="C02"] {
+    border: 2px solid #000000; /* Borde negro para los botones blancos */
 }
 
 .color-option.active,
@@ -36,6 +39,13 @@ h1, h2, h3, h4, h5, h6 {
 .finish-option::after {
     content: '✓';
     color: white;
+    font-weight: bold;
+    display: none;
+}
+
+.color-option[data-color="C02"]::after {
+    content: '✓';
+    color: rgb(0, 0, 0);
     font-weight: bold;
     display: none;
 }
@@ -70,14 +80,6 @@ h1, h2, h3, h4, h5, h6 {
 #bike-container img:first-child {
     position: relative;
 }
-
-/* Color options */
-.color-option[data-color="C01-BLACK"] { background-color: #000000; }
-.color-option[data-color="C02-WHITE"] { background-color: #FFFFFF; }
-.color-option[data-color="C03-RED"] { background-color: #FF0000; }
-.color-option[data-color="C04-BLUE"] { background-color: #0000FF; }
-.color-option[data-color="C05-GREEN"] { background-color: #00FF00; }
-.color-option[data-color="C06-YELLOW"] { background-color: #FFFF00; }
 
 #loadingModal {
     position: fixed;

@@ -80,20 +80,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!layers[bikeName][view][layer][color]) {
                     layers[bikeName][view][layer][color] = [];
                 }
-        
+                
+                colorSearch = color;
+                colorData = colorCodes.find(color => color.code == colorSearch)
+
                 layers[bikeName][view][layer][color].push({
                     imageName: imageName,
+                    hex: colorData.hex,
+                    desc: colorData.desc,
+                    code: color,
                     finish: finish
                 });
             }
             return layers;
         }, {});
 
-        console.log(layerImages);
+// Function to sort by color code number
+function sortByColorCode(layers) {
+    Object.keys(layers).forEach(bikeName => {
+        Object.keys(layers[bikeName]).forEach(view => {
+            Object.keys(layers[bikeName][view]).forEach(layer => {
+                const sortedColors = Object.keys(layers[bikeName][view][layer])
+                    .sort((a, b) => {
+                        const numA = parseInt(a.slice(1));
+                        const numB = parseInt(b.slice(1));
+                        return numA - numB;
+                    })
+                    .reduce((acc, key) => {
+                        acc[key] = layers[bikeName][view][layer][key];
+                        return acc;
+                    }, {});
+                layers[bikeName][view][layer] = sortedColors;
+            });
+        });
+    });
+}
 
-        updateBikeSelector();
-        updateFinishSelectors();
-        updateLayerSelectors();
+// Sort layerImages by rainbow color order
+sortByColorCode(layerImages);
+
+    updateBikeSelector();
+    updateFinishSelectors();
+    updateLayerSelectors();
 
     }
 
@@ -243,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 layerHtml += `<h3>Layer ${k}</h3>`;
                 layerHtml += `<div id="layer${k}-options" class="d-flex flex-wrap layer-options">`;
-    
+
                 for (let l = 0; l < bikeColors.length; l++) {
                     const color = colorCodes.find(color => color.code === bikeColors[l]);
                     const div = document.createElement('div');
