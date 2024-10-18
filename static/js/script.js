@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const acceptBtn = document.getElementById('accept-btn');
     const cancelBtn = document.getElementById('cancel-btn');
     const resetBtn = document.getElementById('reset-btn');
+    let imagesCND = '';
+
+    // if current domain is berria-bikecustomizer.servidorbeta.com uses CND images if not put '' on imagesCND
+    if (window.location.hostname === 'berria-bikecustomizer-front.servidorbeta.com') {
+        const imagesCND = 'https://cdn-berria-bikecustomizer.static-servidorbeta.com/cdn-cgi/image/width=800,height=800,quality=90/';}
+  
     let layerImages = {};
     let currentBike = 'MAKO';
     let currentFinish = 'XX';
@@ -186,7 +192,7 @@ sortByColorCode(layerImages);
             const layerImageElement = document.getElementById(`layer${layerIndex}`);
             
             if (layerImageElement) {
-                layerImageElement.src = `/${imageName}`;
+                layerImageElement.src = imageName;
             } else {
                 console.error(`Elemento de la capa ${layerIndex} no encontrado en el contenedor de la bicicleta.`);
             }
@@ -227,7 +233,7 @@ sortByColorCode(layerImages);
                 const imageName = optionToActivate.getAttribute('data-image');
                 const layerImageElement = document.getElementById(`layer${layer}`);
                 if (layerImageElement) {
-                    layerImageElement.src = `/${imageName}`;
+                    layerImageElement.src = `${imageName}`;
                 }
             } else {
                 console.error(`No se encontró la opción de color para la capa ${layer} con el color ${color}`);
@@ -256,7 +262,7 @@ sortByColorCode(layerImages);
             const bikeContainer = document.getElementById('bike-container');
 
             if(bikeColors[0] === 'XX')
-                imageSrc = `static/images/${getImageName(currentFinish, k, bikeColors[0])}`;
+                imageSrc = imagesCND+`static/images/${getImageName(currentFinish, k, bikeColors[0])}`;
             else
                 imageSrc = ``;
 
@@ -279,7 +285,7 @@ sortByColorCode(layerImages);
                     div.setAttribute('title', `${color.desc}`);
                     div.setAttribute('data-color', `${color.code}`);
                     div.setAttribute('data-layer', `${k}`);
-                    div.setAttribute('data-image', `static/images/${getImageName(currentFinish, k, bikeColors[l])}`);
+                    div.setAttribute('data-image', imagesCND+`static/images/${getImageName(currentFinish, k, bikeColors[l])}`);
                     div.style.backgroundColor = color.hex; // Asignar el color hexadecimal
     
                     if (l === 0) {
@@ -314,7 +320,7 @@ sortByColorCode(layerImages);
                 // Get layer from parent element
                 const layer = this.getAttribute('data-layer');
                 // Update src image with new image
-                document.getElementById(`layer${layer}`).src = `/${imageName}`;
+                document.getElementById(`layer${layer}`).src = `${imageName}`;
             });
         });
 
@@ -390,7 +396,7 @@ sortByColorCode(layerImages);
             // get layer from parent element
             const layerNum = layer.querySelector('.color-option').getAttribute('data-layer');
             // update src image with new image
-            document.getElementById(`layer${layerNum}`).src = `/${imageName}`;
+            document.getElementById(`layer${layerNum}`).src = imageName;
 
 
 
