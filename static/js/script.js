@@ -7,8 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     let imagesCND = '';
 
     // if current domain is berria-bikecustomizer.servidorbeta.com uses CND images if not put '' on imagesCND
-    if (window.location.hostname === 'berria-bikecustomizer-front.servidorbeta.com') 
-        imagesCND = 'https://cdn-berria-bikecustomizer.static-servidorbeta.com/cdn-cgi/image/width=800,height=800,quality=90/';
+    if (window.location.hostname === 'berria-bikecustomizer-front.servidorbeta.com') {
+
+        // if query string var "CACHE" is set to "NO" then don't use CND images
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('CACHE') === 'NO'){
+            imagesCND = '';}
+        else {
+            imagesCND = 'https://cdn-berria-bikecustomizer.static-servidorbeta.com/cdn-cgi/image/width=800,height=800,quality=90/';}
+
+        }
   
     let layerImages = {};
     let currentBike = 'MAKO';
@@ -278,7 +286,7 @@ sortByColorCode(layerImages);
             } else {
                 layerHtml += `<h3>Layer ${k}</h3>`;
                 layerHtml += `<div id="layer${k}-options" class="d-flex flex-wrap layer-options">`;
-
+                
                 for (let l = 0; l < bikeColors.length; l++) {
                     const color = colorCodes.find(color => color.code === bikeColors[l]);
                     const div = document.createElement('div');
