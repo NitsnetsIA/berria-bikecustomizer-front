@@ -19,6 +19,29 @@ def validate_token(access_token):
         print(f'Error al validar el token: {error}')
         return False
 
+def list_all_files_in_folder(service, folder_id):
+    page_token = None
+    all_items = []
+
+    while True:
+        results = service.files().list(
+            q=f"'{folder_id}' in parents and mimeType contains 'image/' and trashed = false",
+            fields="nextPageToken, files(id, name, modifiedTime)",
+            supportsAllDrives=True,
+            includeItemsFromAllDrives=True,
+            pageToken=page_token,
+            pageSize=1000
+        ).execute()
+
+        items = results.get('files', [])
+        all_items.extend(items)
+
+        page_token = results.get('nextPageToken')
+        if not page_token:
+            break
+
+    return all_items
+
 def update_images_from_drive(access_token, folder_id, images_dir='static/images'):
     try:
         # Crear las credenciales utilizando el token de acceso
@@ -27,13 +50,8 @@ def update_images_from_drive(access_token, folder_id, images_dir='static/images'
         # Crear el servicio de Google Drive
         service = build('drive', 'v3', credentials=creds)
 
-        # Listar los archivos en la carpeta especificada, evitando caché
-        results = service.files().list(
-            q=f"'{folder_id}' in parents and mimeType contains 'image/'",
-            fields="files(id, name, modifiedTime)",
-            supportsAllDrives=True
-        ).execute()
-        items = results.get('files', [])
+        # Listar todos los archivos en la carpeta especificada
+        items = list_all_files_in_folder(service, folder_id)
 
         if not items:
             print('No se encontraron archivos en la carpeta especificada.')
@@ -118,4 +136,3 @@ def get_images_list():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-

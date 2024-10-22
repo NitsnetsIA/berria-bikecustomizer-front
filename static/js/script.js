@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         console.error(`Imagen con el acabado "${finish}" y color "${color}" no encontrada para la capa "${layer}".`);
+        alert(`Imagen con el acabado "${finish}" y color "${color}" no encontrada para la capa "${layer}".`);
         return null;
     }
     
